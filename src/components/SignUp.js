@@ -1,5 +1,5 @@
-import { async } from "@firebase/util";
 import React, { useState } from "react";
+
 import { useAuth } from "../context/AuthContex";
 import { firabaseError } from "../helpers/firabaseErros";
 import { useForm } from "../hooks/useForm";
@@ -35,6 +35,7 @@ export const SignUp = ({ setShowSignUp }) => {
     } catch (error) {
       const errorCode = error.code;
       const message = firabaseError(errorCode)
+      console.log(error)
       setError(message);
     }
   };
