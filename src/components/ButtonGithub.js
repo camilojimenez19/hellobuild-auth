@@ -1,8 +1,11 @@
 import React from "react";
 
-export const ButtonGithub = () => {
+export const ButtonGithub = ({ onClick }) => {
   return (
-    <button className="w-full px-4 py-2 text-center text-white bg-black rounded shadow waves-light hover:shadow-lg hover:bg-black focus:outline-none">
+    <button 
+      className="w-full px-4 py-2 text-center text-white bg-black rounded shadow waves-light hover:shadow-lg hover:bg-black focus:outline-none"
+      onClick={onClick}
+    >
       <svg
         className="w-5 h-5 text-white fill-current inline-block"
         xmlns="http://www.w3.org/2000/svg"

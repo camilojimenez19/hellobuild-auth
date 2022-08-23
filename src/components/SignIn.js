@@ -10,7 +10,7 @@ export const SignIn = ({ setShowSignUp }) => {
   const [error, setError] = useState();
 
   /* Hook auth */
-  const { signIn } = useAuth();
+  const { signIn, signInWithGithub } = useAuth();
 
   const { email, password, onChange } = useForm({
     email: "",
@@ -40,6 +40,10 @@ export const SignIn = ({ setShowSignUp }) => {
     }
   };
 
+  const handleSignInGitHub = () => {
+    signInWithGithub();
+  }
+
   return (
     <div className="w-full max-w-xs m-auto">
       {/* Alert */}
@@ -61,7 +65,7 @@ export const SignIn = ({ setShowSignUp }) => {
               name="email"
               placeholder="email_test@hellobuld.co"
               onChange={handleChange}
-              autocomplete={false}
+              autoComplete="false"
             />
           </div>
           <div className="mb-4">
@@ -87,7 +91,7 @@ export const SignIn = ({ setShowSignUp }) => {
         </form>
 
         {/* GitHub Button */}
-        <ButtonGithub />
+        <ButtonGithub onClick={handleSignInGitHub}/>
       </div>
 
       <div className="text-center text-gray-500 mx-auto">

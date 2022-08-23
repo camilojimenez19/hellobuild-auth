@@ -3,7 +3,9 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   onAuthStateChanged,
-  signOut
+  signOut,
+  GithubAuthProvider,
+  signInWithPopup,
 } from "firebase/auth";
 import { auth } from "../auth/firabase";
 
@@ -34,8 +36,23 @@ export const AuthProvider = ({ children }) => {
     setIsSignIn(true);
   };
 
+  const signInWithGithub = () => {
+    const githubAuthProvider = new GithubAuthProvider();
+    signInWithPopup(auth, githubAuthProvider).then((result) => {
+      const credential = GithubAuthProvider.credentialFromResult(result);
+      const token = credential.accessToken;
+
+      const user = result.user;
+
+      console.log(token);
+      console.log(user);
+    });
+  };
+
   /* Logout sesion */
-  const logout = () => {signOut(auth)};
+  const logout = () => {
+    signOut(auth);
+  };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -58,7 +75,8 @@ export const AuthProvider = ({ children }) => {
         setIsSignIn,
         signUp,
         signIn,
-        logout
+        logout,
+        signInWithGithub
       }}
     >
       {children}

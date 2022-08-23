@@ -6,7 +6,6 @@ import { useForm } from "../hooks/useForm";
 import { Alert } from "./Alert";
 
 export const SignUp = ({ setShowSignUp }) => {
-
   const [error, setError] = useState();
 
   /* Hook auth */
@@ -25,9 +24,9 @@ export const SignUp = ({ setShowSignUp }) => {
   /* Handle for submut SignUp */
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
+    setError("");
 
-    if(email === "" && password === "")
+    if (email === "" && password === "")
       return setError("Email and password are required");
 
     try {
@@ -36,8 +35,8 @@ export const SignUp = ({ setShowSignUp }) => {
       setShowSignUp(false);
     } catch (error) {
       const errorCode = error.code;
-      const message = firabaseError(errorCode)
-      console.log(error)
+      const message = firabaseError(errorCode);
+      console.log(error);
       setError(message);
     }
   };
@@ -48,7 +47,9 @@ export const SignUp = ({ setShowSignUp }) => {
       {error && <Alert message={error} />}
 
       <div className="bg-white shadow-md rounded-lg px-8 pt-6 pb-8 mb-4">
-        <h2 className="text-center font-bold uppercase text-xl font-sans mb-4">SignUp</h2>
+        <h2 className="text-center font-bold uppercase text-xl font-sans mb-4">
+          SignUp
+        </h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label
@@ -63,7 +64,7 @@ export const SignUp = ({ setShowSignUp }) => {
               name="email"
               placeholder="email_test@hellobuld.co"
               onChange={handleChange}
-              autocomplete={false}
+              autoComplete="false"
             />
           </div>
           <div className="mb-4">
@@ -87,11 +88,12 @@ export const SignUp = ({ setShowSignUp }) => {
             SignUp
           </button>
         </form>
-
       </div>
 
       <div className="text-center text-gray-500 mx-auto">
-        <button onClick={() => setShowSignUp(false)}>Do you already have an account?</button>
+        <button onClick={() => setShowSignUp(false)}>
+          Do you already have an account?
+        </button>
       </div>
     </div>
   );
