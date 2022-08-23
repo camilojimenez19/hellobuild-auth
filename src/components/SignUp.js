@@ -33,6 +33,7 @@ export const SignUp = ({ setShowSignUp }) => {
     try {
       await signUp(email, password);
       setIsSignIn(true);
+      setShowSignUp(false);
     } catch (error) {
       const errorCode = error.code;
       const message = firabaseError(errorCode)
@@ -42,31 +43,56 @@ export const SignUp = ({ setShowSignUp }) => {
   };
 
   return (
-    <div>
+    <div className="w-full max-w-xs m-auto">
       {/* Alert */}
-      { error && <Alert message={error}/>}
+      {error && <Alert message={error} />}
 
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="email">Email</label>
-        <input
-          type="email"
-          name="email"
-          placeholder="email_test@hellobuld.co"
-          onChange={handleChange}
-        />
+      <div className="bg-white shadow-md rounded-lg px-8 pt-6 pb-8 mb-4">
+        <h2 className="text-center font-bold uppercase text-xl font-sans mb-4">SignUp</h2>
+        <form onSubmit={handleSubmit}>
+          <div className="mb-4">
+            <label
+              htmlFor="email"
+              className="block text-gray-700 text-sm font-fold mb-2"
+            >
+              Email
+            </label>
+            <input
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              type="email"
+              name="email"
+              placeholder="email_test@hellobuld.co"
+              onChange={handleChange}
+              autocomplete={false}
+            />
+          </div>
+          <div className="mb-4">
+            <label
+              htmlFor="password"
+              className="block text-gray-700 text-sm font-fold mb-2"
+            >
+              Password
+            </label>
+            <input
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              type="password"
+              name="password"
+              id="password"
+              placeholder="*********"
+              onChange={handleChange}
+            />
+          </div>
 
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          name="password"
-          id="password"
-          placeholder="*********"
-          onChange={handleChange}
-        />
+          <button className="w-full bg-blue-500 hover:bg-blue-700 text-white text-sm font-bold py-2 px-4 mb-2 rounded  focus:outline-none focus:shadow-outline">
+            SignUp
+          </button>
+        </form>
 
-        <button>SignUp</button>
-      </form>
-      <button onClick={() => setShowSignUp(false) }>SignIn</button>
+      </div>
+
+      <div className="text-center text-gray-500 mx-auto">
+        <button onClick={() => setShowSignUp(false)}>Do you already have an account?</button>
+      </div>
     </div>
   );
 };
