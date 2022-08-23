@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useAuth } from "../context/AuthContex";
 import { firabaseError } from "../helpers/firabaseErros";
 import { useForm } from "../hooks/useForm";
+import { Alert } from "./Alert";
 
 export const SignUp = ({ setShowSignUp }) => {
 
@@ -41,8 +42,9 @@ export const SignUp = ({ setShowSignUp }) => {
   };
 
   return (
-    <>
-      { error && <p>{error}</p>}
+    <div>
+      {/* Alert */}
+      { error && <Alert message={error}/>}
 
       <form onSubmit={handleSubmit}>
         <label htmlFor="email">Email</label>
@@ -65,6 +67,6 @@ export const SignUp = ({ setShowSignUp }) => {
         <button>SignUp</button>
       </form>
       <button onClick={() => setShowSignUp(false) }>SignIn</button>
-    </>
+    </div>
   );
 };
