@@ -1,16 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 
-// import { authContext, useAuth } from "./context/AuthContex";
-// import { Home } from "./components/Home";
+import { Home } from "./components/Home";
 import { SignIn } from "./components/SignIn";
-// import { SignUp } from "./components/SignUp";
+import { SignUp } from "./components/SignUp";
+import { useAuth } from "./context/AuthContex";
 
 const App = () => {
-  // const { user } = useAuth(authContext);
+  const { isSignIn } = useAuth();
 
-  // console.log(user)
+  const [showSignUp, setShowSignUp] = useState(false)
 
-  return <div className="bg-green-100 h-screen flex"><SignIn /></div>;
+  /* Function reder for each component */
+  const renderContent = () => {
+    if(isSignIn) return <Home />
+    if(showSignUp) return <SignUp setShowSignUp={setShowSignUp}/>
+
+    return <SignIn setShowSignUp={setShowSignUp}/>
+  };
+
+  return (
+    <div className="bg-green-100 h-screen flex">
+      { renderContent() }
+    </div>
+  );
 };
 
 export default App;

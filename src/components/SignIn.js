@@ -1,11 +1,6 @@
 import React from "react";
-import { useAuth } from "../context/AuthContex";
 
-export const SignIn = () => {
-
-  const {user} = useAuth();
-
-  console.log(user)
+export const SignIn = ({ setShowSignUp }) => {
 
   // const [form, setForm] = useState({
   //   email: '',
@@ -18,6 +13,8 @@ export const SignIn = () => {
         <input type="email" name="email" id="name"/>
         <input type="password" name="password" id="password"/>
       </form>
+
+      <button onClick={() => setShowSignUp(true) }>create account</button>
     </div>
   );
 };
