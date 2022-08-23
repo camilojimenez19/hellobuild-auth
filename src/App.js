@@ -1,20 +1,16 @@
 import React from "react";
-import { Routes, Route } from 'react-router-dom';
 
-import { Home } from "./components/Home";
+// import { authContext, useAuth } from "./context/AuthContex";
+// import { Home } from "./components/Home";
 import { SignIn } from "./components/SignIn";
-import { SignUp } from "./components/SignUp";
-
+// import { SignUp } from "./components/SignUp";
 
 const App = () => {
+  // const { user } = useAuth(authContext);
 
-  return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/signin" element={<SignIn /> } />
-      <Route path="/signup" element={<SignUp />} />
-    </Routes>
-  );
+  // console.log(user)
+
+  return <div className="bg-green-100 h-screen flex"><SignIn /></div>;
 };
 
 export default App;
