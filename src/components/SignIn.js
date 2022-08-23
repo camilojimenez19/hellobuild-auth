@@ -9,7 +9,7 @@ export const SignIn = ({ setShowSignUp }) => {
   const [error, setError] = useState();
 
   /* Hook auth */
-  const { signIn, setIsSignIn } = useAuth();
+  const { signIn } = useAuth();
 
   const { email, password, onChange } = useForm({
     email: "",
@@ -31,7 +31,6 @@ export const SignIn = ({ setShowSignUp }) => {
 
     try {
       await signIn(email, password);
-      setIsSignIn(true);
     } catch (error) {
       const errorCode = error.code;
       const message = firabaseError(errorCode);

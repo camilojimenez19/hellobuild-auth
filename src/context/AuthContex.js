@@ -1,5 +1,10 @@
-import { createContext, useContext, useState } from "react";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { createContext, useContext, useEffect, useState } from "react";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut
+} from "firebase/auth";
 import { auth } from "../auth/firabase";
 
 /* Create context */
@@ -14,27 +19,46 @@ export const useAuth = () => {
 
 /* Set provider for context */
 export const AuthProvider = ({ children }) => {
-  
   const [isSignIn, setIsSignIn] = useState(false);
-  
-  /* App state info */
-  // const user = {
-  //   isSignIn,
-  // };
+  const [isLoading, setIsLoading] = useState(true);
+
+  const [user, setUser] = useState(null);
 
   /* Create a new user with email and password */
-  const signUp = (email, password) => createUserWithEmailAndPassword(auth, email, password);
-  
+  const signUp = (email, password) =>
+    createUserWithEmailAndPassword(auth, email, password);
+
   /* SignIn user */
-  const signIn = (email, password) => signInWithEmailAndPassword(auth, email, password);
+  const signIn = async (email, password) => {
+    await signInWithEmailAndPassword(auth, email, password);
+    setIsSignIn(true);
+  };
+
+  /* Logout sesion */
+  const logout = () => signOut(auth);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      if (currentUser) {
+        setUser(currentUser);
+        setIsSignIn(true);
+      }
+      setIsLoading(false);
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   return (
     <authContext.Provider
       value={{
+        user,
         isSignIn,
+        isLoading,
         setIsSignIn,
         signUp,
-        signIn
+        signIn,
+        logout
       }}
     >
       {children}
