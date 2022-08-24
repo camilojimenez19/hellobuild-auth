@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useAuth } from "../context/AuthContex";
 
-function Nav({ setCurrentPage }) {
+function Nav({ setCurrentPage, searchOnChange, search }) {
 
-  const { logout, setIsSignIn } = useAuth();
+  const { logout, setIsSignIn } = useAuth();  
 
   /* Handle for logout user */
   const handleLogout = async () => {
@@ -55,6 +55,8 @@ function Nav({ setCurrentPage }) {
             </ul>
             <form className="d-flex">
               <input
+                value={search}
+                onChange={searchOnChange}
                 className="form-control me-2"
                 type="search"
                 placeholder="Search"

@@ -4,7 +4,7 @@ import { ButtonGithub } from "./ButtonGithub";
 import { ListRepositories } from "./ListRepositories";
 import { useRepository } from "../hooks/useRepository";
 
-export const Repositories = () => {
+export const Repositories = ({search, setSearch}) => {
 
   /* Custom hook */
   const {
@@ -13,7 +13,7 @@ export const Repositories = () => {
     handleSignInGitHub,
     handleRemoveRepoToFavorites,
     handleAddRepoToFavorites
-  } = useRepository();
+  } = useRepository(search, setSearch);
 
   /* Render content when user is not logged in GitHub */
   if (!tokenGitHub)
@@ -41,7 +41,14 @@ export const Repositories = () => {
       <section>
         <h3>Own repositories</h3>
         <hr />
-        <ListRepositories repositories={dataRepositories.owner} action={handleAddRepoToFavorites} />
+        <ListRepositories 
+          repositories={
+            (search)
+              ? dataRepositories.filtered
+              : dataRepositories.owner
+          } 
+          action={handleAddRepoToFavorites}
+        />
       </section>
     </div>
   );

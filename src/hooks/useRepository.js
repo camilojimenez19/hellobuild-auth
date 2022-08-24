@@ -2,11 +2,14 @@ import { useEffect, useState } from "react";
 import gitHubAPI from "../api/githubAPI";
 import { useAuth } from "../context/AuthContex";
 
-export const useRepository = () => {
+export const useRepository = (search, setSearch) => {
+
     const { tokenGitHub, signInWithGithub } = useAuth();
+    
     const [dataRepositories, setDataRepositories] = useState({
         owner: [],
-        favorites: []
+        favorites: [],
+        filtered: []
     })
 
     const getRepositoriesGitHub = async (tokenAPI) => {
@@ -19,22 +22,24 @@ export const useRepository = () => {
         })
     }
 
+    /* Handle for add repo from favorites */
     const handleAddRepoToFavorites = (index) => {
+        setSearch('');
         const [repo] = dataRepositories.owner.splice(index, 1);
         setDataRepositories({
             ...dataRepositories,
-            favorites: [...dataRepositories.favorites, repo],
-        })
-
+            favorites: [...dataRepositories.favorites, repo] 
+        });
     }
 
     /* Handle for remove repo from favorites */
     const handleRemoveRepoToFavorites = (index) => {
+        setSearch('');
         const [repo] = dataRepositories.favorites.splice(index, 1);
         setDataRepositories({
             ...dataRepositories,
             owner: [...dataRepositories.owner, repo],
-        })
+        });
     }
 
     /* Handle for sigin with github */
@@ -43,11 +48,31 @@ export const useRepository = () => {
         getRepositoriesGitHub(token);
     }
 
+    const searchRepo = () => {
+        if(search){
+            const findRepos = dataRepositories.owner.filter((repo) => repo.name.includes(search));
+            setDataRepositories({
+                ...dataRepositories,
+                filtered: findRepos,
+            })
+        }else{
+            setDataRepositories({
+                ...dataRepositories,
+                filtered: [],
+            })
+        }
+    }    
+
     useEffect(() => {
         if (tokenGitHub) {
             getRepositoriesGitHub();
         }
     }, []);
+
+    useEffect(() => {
+        searchRepo();
+    }, [search])
+    
 
 
     return {

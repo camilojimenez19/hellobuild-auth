@@ -8,13 +8,19 @@ export const Home = () => {
 
   const [currentPage, setCurrentPage] = useState('repositories'); 
 
+  const [searchInput, setSearchInput] = useState();
+  
+  const handleOnChangeText = ({ target: { value } }) => {
+    setSearchInput(value);
+  }
+
   return (
     <div className="w-100">    
       {/* Navigarion  */}
-      <Nav setCurrentPage={setCurrentPage}/>
+      <Nav setCurrentPage={setCurrentPage} searchOnChange={handleOnChangeText} search={searchInput}/>
 
       {/* Main content */}
-      {currentPage === "repositories" ? <Repositories /> : <Profile />}
+      {currentPage === "repositories" ? <Repositories search={searchInput} setSearch={setSearchInput} /> : <Profile />}
       
     </div>
   )
