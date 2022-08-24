@@ -39,9 +39,10 @@ export const AuthProvider = ({ children }) => {
 
   const signInWithGithub = () => {
     const githubAuthProvider = new GithubAuthProvider();
-    signInWithPopup(auth, githubAuthProvider).then((result) => {
+    return signInWithPopup(auth, githubAuthProvider).then((result) => {
       const credential = GithubAuthProvider.credentialFromResult(result);
       setTokenGitHub(credential.accessToken);
+      return (credential.accessToken)
     });
   };
 

@@ -1,6 +1,16 @@
 import React from "react";
+import { useAuth } from "../context/AuthContex";
 
-function Nav({ logout, setCurrentPage }) {
+function Nav({ setCurrentPage }) {
+
+  const { logout, setIsSignIn } = useAuth();
+
+  /* Handle for logout user */
+  const handleLogout = async () => {
+    await logout();
+    setIsSignIn(false);
+  }
+
   return (
     <header>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -34,9 +44,9 @@ function Nav({ logout, setCurrentPage }) {
               <li className="nav-item">
                 <a
                   className="nav-link"
-                  onClick={logout}
+                  onClick={handleLogout}
                   href="/#"
-                  tabindex="-1"
+                  tabIndex="-1"
                   aria-disabled="true"
                 >
                   Logout
