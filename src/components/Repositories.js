@@ -4,12 +4,13 @@ import { ButtonGithub } from "./ButtonGithub";
 import { ListRepositories } from "./ListRepositories";
 import { useRepository } from "../hooks/useRepository";
 
-export const Repositories = ({search, setSearch}) => {
+export const Repositories = ({ search, setSearch }) => {
 
   /* Custom hook */
   const {
     tokenGitHub,
-    dataRepositories,
+    favoriteRepos,
+    searchResults,
     handleSignInGitHub,
     handleRemoveRepoToFavorites,
     handleAddRepoToFavorites
@@ -29,11 +30,11 @@ export const Repositories = ({search, setSearch}) => {
     <div className="container mt-5" >
       <h1 className="mb-4"> Repositories </h1>
 
-      {dataRepositories.favorites.length > 0 && (
+      {favoriteRepos.length > 0 && (
         <section>
           <h3>Favorite repositories</h3>
           <hr />
-          <ListRepositories repositories={dataRepositories.favorites} action={handleRemoveRepoToFavorites} removeRepo />
+          <ListRepositories repositories={favoriteRepos} action={handleRemoveRepoToFavorites} removeRepo />
 
         </section>
       )}
@@ -41,12 +42,8 @@ export const Repositories = ({search, setSearch}) => {
       <section>
         <h3>Own repositories</h3>
         <hr />
-        <ListRepositories 
-          repositories={
-            (search)
-              ? dataRepositories.filtered
-              : dataRepositories.owner
-          } 
+        <ListRepositories
+          repositories={searchResults}
           action={handleAddRepoToFavorites}
         />
       </section>

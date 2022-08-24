@@ -8,7 +8,7 @@ export const Home = () => {
 
   const [currentPage, setCurrentPage] = useState('repositories'); 
 
-  const [searchInput, setSearchInput] = useState();
+  const [searchInput, setSearchInput] = useState('');
   
   const handleOnChangeText = ({ target: { value } }) => {
     setSearchInput(value);

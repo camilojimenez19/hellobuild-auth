@@ -7,8 +7,6 @@ export const Profile = () => {
   const { displayName, photoURL, email } = user;
   let imageUrl = photoURL;
 
-  console.log(user)
-
   if(!photoURL){
     const [username] = email.split('@');
     imageUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(username)}`
