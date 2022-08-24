@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import { useAuth } from "../context/AuthContex";
 
 function Nav({ setCurrentPage, searchOnChange, search }) {

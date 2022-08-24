@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { useAuth } from '../context/AuthContex'
 import Nav from './Nav';
 import { Profile } from './Profile';
 import { Repositories } from './Repositories';
