@@ -40,8 +40,11 @@
 
 /* Login */
 
+.background{
+	background-color: #caf0f8;
+}
+
 .login {
-  background-color: #caf0f8;
   width: 100vw;
   height: 100vh;
 }

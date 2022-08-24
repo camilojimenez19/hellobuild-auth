@@ -46,7 +46,7 @@ export const SignIn = ({ setShowSignUp }) => {
   }
 
   return (
-    <div className="d-flex login justify-content-center align-items-center flex-column">
+    <div className="d-flex login justify-content-center align-items-center flex-column background">
       {/* Alert */}
       {error && <Alert message={error} />}
 
