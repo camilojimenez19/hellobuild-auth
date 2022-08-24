@@ -1,5 +1,6 @@
 import React from 'react'
 import { useAuth } from '../context/AuthContex'
+import Nav from './Nav';
 
 export const Home = () => {
 
@@ -11,11 +12,10 @@ export const Home = () => {
     setIsSignIn(false);
   }
   return (
-    <div>
-      <h1>Welcome, user</h1>
-      <p>{ JSON.stringify(user, null, 3)}</p>
-
-      <button onClick={handleLogout}>logout</button>
+    <div className="w-full">
+      
+      <Nav logout={handleLogout}/>
+      
     </div>
   )
 }

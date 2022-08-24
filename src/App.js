@@ -23,9 +23,9 @@ const App = () => {
   };
 
   return (
-    <div className="bg-green-100 h-screen flex">
+    <>
       { renderContent() }
-    </div>
+    </>
   );
 };
 

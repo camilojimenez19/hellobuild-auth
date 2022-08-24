@@ -40,27 +40,26 @@ export const SignIn = ({ setShowSignUp }) => {
     }
   };
 
+  /* Handle for sigin with github */
   const handleSignInGitHub = () => {
     signInWithGithub();
   }
 
   return (
-    <div className="w-full max-w-xs m-auto">
+    <div className="d-flex login justify-content-center align-items-center flex-column">
       {/* Alert */}
       {error && <Alert message={error} />}
 
-      <div className="bg-white shadow-md rounded-lg px-8 pt-6 pb-8 mb-4">
-        <h2 className="text-center font-bold uppercase text-xl font-sans mb-4">SignIn</h2>
+      {/* <div className="bg-white shadow-md rounded-lg px-8 pt-6 pb-8 mb-4"> */}
+      <div className="login-container mb-5">
+        <h2 className="text-center mb-4 text-uppercase">SignIn</h2>
         <form onSubmit={handleSubmit}>
-          <div className="mb-4">
-            <label
-              htmlFor="email"
-              className="block text-gray-700 text-sm font-fold mb-2"
-            >
+          <div className="form-group mb-2">
+            <label htmlFor="email">
               Email
             </label>
             <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="form-control"
               type="email"
               name="email"
               placeholder="email_test@hellobuld.co"
@@ -68,15 +67,12 @@ export const SignIn = ({ setShowSignUp }) => {
               autoComplete="false"
             />
           </div>
-          <div className="mb-4">
-            <label
-              htmlFor="password"
-              className="block text-gray-700 text-sm font-fold mb-2"
-            >
+          <div className="form-group mb-4">
+            <label htmlFor="password">
               Password
             </label>
             <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="form-control"
               type="password"
               name="password"
               id="password"
@@ -85,7 +81,7 @@ export const SignIn = ({ setShowSignUp }) => {
             />
           </div>
 
-          <button className="w-full bg-blue-500 hover:bg-blue-700 text-white text-sm font-bold py-2 px-4 mb-2 rounded  focus:outline-none focus:shadow-outline">
+          <button type="submit" className="btn btn-primary btn-block w-100 mb-2">
             SignIn
           </button>
         </form>
@@ -94,8 +90,8 @@ export const SignIn = ({ setShowSignUp }) => {
         <ButtonGithub onClick={handleSignInGitHub}/>
       </div>
 
-      <div className="text-center text-gray-500 mx-auto">
-        <button onClick={() => setShowSignUp(true)}>You do not have an account?</button>
+      <div className="text-center mx-auto redirect">
+        <a href="/#" onClick={() => setShowSignUp(true)}>You do not have an account?</a>
       </div>
     </div>
   );

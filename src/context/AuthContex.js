@@ -23,6 +23,7 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }) => {
   const [isSignIn, setIsSignIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [tokenGitHub, setTokenGitHub] = useState(null)
 
   const [user, setUser] = useState(null);
 
@@ -40,18 +41,14 @@ export const AuthProvider = ({ children }) => {
     const githubAuthProvider = new GithubAuthProvider();
     signInWithPopup(auth, githubAuthProvider).then((result) => {
       const credential = GithubAuthProvider.credentialFromResult(result);
-      const token = credential.accessToken;
-
-      const user = result.user;
-
-      console.log(token);
-      console.log(user);
+      setTokenGitHub(credential.accessToken);
     });
   };
 
   /* Logout sesion */
   const logout = () => {
     signOut(auth);
+    setTokenGitHub(null);
   };
 
   useEffect(() => {
@@ -72,6 +69,7 @@ export const AuthProvider = ({ children }) => {
         user,
         isSignIn,
         isLoading,
+        tokenGitHub,
         setIsSignIn,
         signUp,
         signIn,
