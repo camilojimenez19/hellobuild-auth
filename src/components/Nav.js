@@ -1,6 +1,6 @@
 import React from "react";
 
-function Nav({ logout }) {
+function Nav({ logout, setCurrentPage }) {
   return (
     <header>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -22,8 +22,13 @@ function Nav({ logout }) {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="/#">
+                <a className="nav-link active" aria-current="page" href="/#" onClick={() => setCurrentPage('repositories')}>
                   Repositories
+                </a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link active" aria-current="page" href="/#" onClick={() => setCurrentPage('profile')} >
+                  Profile
                 </a>
               </li>
               <li className="nav-item">
